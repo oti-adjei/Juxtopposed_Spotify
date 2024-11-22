@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:spotify_juxtopposed/account.dart';
 import 'package:spotify_juxtopposed/discovery.dart';
 import 'package:spotify_juxtopposed/home.dart';
+import 'package:spotify_juxtopposed/library.dart';
 import 'package:spotify_juxtopposed/search.dart';
 // import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -27,59 +29,14 @@ class MyApp extends StatelessWidget {
   }
 }
 
-/*class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Column(
-        // mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          const Text(
-            'You have pushed the button this many times:',
-          ),
-          Text(
-            '$_counter',
-            style: Theme.of(context).textTheme.headlineMedium,
-          ),
-          //Show the navigation bar at the bottom
-          CustomNavigationBar(),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
-  }
-}
-*/
-
 // Define a provider to manage current index
 final currentIndexProvider = StateProvider<int>((ref) => 0);
 Color _navColor = Color.fromRGBO(0, 0, 0, 0.1);
 
 // Navigation bar widget with blur effect
 class CustomNavigationBar extends ConsumerWidget {
+  const CustomNavigationBar({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentIndex = ref.watch(currentIndexProvider);
@@ -140,42 +97,28 @@ class MainApp extends ConsumerWidget {
     final currentIndex = ref.watch(currentIndexProvider);
 
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text("FLutter Demo"),
-      // ),
       body: SafeArea(
         child: Stack(
           children: [
             IndexedStack(
               index: currentIndex,
               children: [
-                // HomeScreen(),
-                // SearchScreen(),
-                // LibraryScreen(),
                 SpotifyCloneHome(),
                 DiscoveryMenu(),
                 SearchMenu(),
-                Center(child: Text('Library')),
-                //A list view to show a list of contacts
-                ListView.builder(
-                  itemCount: 30,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text('Contact ${index + 1}'),
-                    );
-                  },
-                ),
+                LibraryPage(),
+                AccountPage()
               ],
             ),
             CustomNavigationBar(),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {},
+      //   tooltip: 'Increment',
+      //   child: const Icon(Icons.add),
+      // ),
     );
   }
 }

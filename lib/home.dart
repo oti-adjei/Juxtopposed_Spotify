@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final tabProvider = StateProvider<int>((ref) => 0);
 
 class SpotifyCloneHome extends ConsumerWidget {
+  const SpotifyCloneHome({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentIndex = ref.watch(tabProvider);
@@ -56,7 +58,7 @@ class _TabButton extends ConsumerWidget {
   final String label;
   final int index;
 
-  _TabButton({required this.label, required this.index});
+  const _TabButton({required this.label, required this.index});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -77,6 +79,8 @@ class _TabButton extends ConsumerWidget {
 }
 
 class MusicPage extends StatelessWidget {
+  const MusicPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -93,7 +97,7 @@ class MusicPage extends StatelessWidget {
         SizedBox(height: 20),
         SectionTitle("Made For You"),
         SizedBox(height: 8),
-        Container(
+        SizedBox(
           height: 180,
           child: ListView(
             scrollDirection: Axis.horizontal,
@@ -103,7 +107,7 @@ class MusicPage extends StatelessWidget {
         SizedBox(height: 20),
         SectionTitle("Your Top Mixes"),
         SizedBox(height: 8),
-        Container(
+        SizedBox(
           height: 180,
           child: ListView(
             scrollDirection: Axis.horizontal,
@@ -113,7 +117,7 @@ class MusicPage extends StatelessWidget {
         SizedBox(height: 20),
         SectionTitle("New Releases"),
         SizedBox(height: 8),
-        Container(
+        SizedBox(
           height: 180,
           child: ListView(
             scrollDirection: Axis.horizontal,
